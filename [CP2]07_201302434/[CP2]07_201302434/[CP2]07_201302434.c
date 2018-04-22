@@ -18,12 +18,12 @@ int main(void){
 	// 변수
 	int array[3][3];//실습 1
 	int rowIndex, colIndex;//실습 1
-	int scoreArray[20][3];//실습 2
-	int inputStudentSize;//실습 2
-	int studentIndex;//실습 2
+	int scoreArray[20][3];//실습 2,  과제 1
+	int inputStudentSize;//실습 2,  과제 1
+	int studentIndex;//실습 2,  과제 1
 	char stringArray[100];//과제 2
 	int num;//과제 3
-	int array2[20];
+	int array2[20];//과제 3
 
 	//실습 1
 	for(rowIndex=0;rowIndex<3;rowIndex++){
@@ -53,12 +53,12 @@ int main(void){
 	}
 	//과제 1
 	printf("\n");
-	for(studentIndex = 0; studentIndex < inputStudentSize;studentIndex++){
-		printSum((int*)&(scoreArray[studentIndex]),studentIndex);
+	for(studentIndex = 0; studentIndex < inputStudentSize;studentIndex++){//학생 수만큼
+		printSum((int*)&(scoreArray[studentIndex]),studentIndex); //printSum함수 실행
 	}
 	printf("\n");
-	for(studentIndex = 0; studentIndex < inputStudentSize;studentIndex++){
-		printAvg((int*)&(scoreArray[studentIndex]),studentIndex);
+	for(studentIndex = 0; studentIndex < inputStudentSize;studentIndex++){//학생 수만큼
+		printAvg((int*)&(scoreArray[studentIndex]),studentIndex);//printAvg함수 실행
 	}
 	printf("\n");
 	getchar();
@@ -70,16 +70,16 @@ int main(void){
 
 	//과제 2
 	printf("\n한 줄을 입력하세요. >>\n");
-	gets(stringArray);
+	gets(stringArray);//문자열 입력
 	printf("\n위에서 입력한 문자열을 거꾸로 출력합니다.\n");
-	invertedOutput(stringArray);
+	invertedOutput(stringArray);//invertedOutput()함수실행
 	
 	//과제 3
 	printf("\nSize가 20인 배열에 넣을 데이터의 수 입력 : "); 
 	scanf("%d",&num); //몇개의 데이터를 넣을지 입력
 	makeArray(array2, num); //배열 안에 랜덤한 수를 num개 넣음
 	printf("오름차순으로 정렬(선택정렬)\n");
-	sortArray(array2, num);
+	sortArray(array2, num); //배열 안에 랜덤한 수를 오름차순으로 정렬
 	return 0;
 }
 
@@ -98,17 +98,17 @@ void printScore(int *scoreArray,int index){
 }
 
 //과제 1
-int printSum(int *scoreArray, int inputIndex){
+int printSum(int *scoreArray, int inputIndex){//한 배열의 합을 구해서 출력.
 	printf("[%d] 총점 : %d\n", inputIndex, scoreArray[0]+scoreArray[1]+scoreArray[2]);
 	return 0;
 }
-int printAvg(int *scoreArray,int inputIndex){
+int printAvg(int *scoreArray,int inputIndex){//한 배열의 합을 구해서 3으로 나눠 평균을 출력.
 	printf("[%d] 평균 : %d\n", inputIndex, (scoreArray[0]+scoreArray[1]+scoreArray[2])/3);
 	return 0;
 }
 
 //과제 2
-void invertedOutput(char str[]){
+void invertedOutput(char str[]){//문자열을 strrev()함수를 이용해서 거꾸로 출력.
 	puts(strrev(str));
 }
 
@@ -119,38 +119,38 @@ int* makeArray(int *intArray, int inputSize){
 
 	for(i = 0;i<inputSize;i++){
 		intArray[i]=rand()%1000;//배열에 랜덤 데이터 저장
-		printf("%d ", intArray[i]);
+		printf("%d ", intArray[i]);//배열 값 출력
 	}
 	printf("\n\n");
 	return 0;
 }
-void swap(int *x, int *y){
+void swap(int *x, int *y){ //값을 변경시켜주는 함수
 	int temp = 0;
-
-	temp = *x;
+	 
+	temp = *x;//임시 저장할 곳에 x값 저장 
 	//printf("temp->%d\n",temp);
-	*x = *y;
-	*y = temp;
+	*x = *y;//x에 y값 저장
+	*y = temp;//y에 임시로 저장해놓은 x값 저장
 	//printf("y->%d\n",temp);
 }
 void sortArray(int *intArray, int inputSize){
 	int i,j;
-	int minNumIndex;
+	int minNumIndex;//최소 값을 가지고 있는 인덱스
 
-	for(i=0;i<inputSize;i++){
+	for(i=0;i<inputSize;i++){//처음부터 끝까지 정렬
 		minNumIndex=i;
-		for(j=i+1;j<inputSize;j++){
-			if(intArray[minNumIndex]>intArray[j]){
-				minNumIndex = j;
+		for(j=i+1;j<inputSize;j++){//해당 자리 다음부터 조사
+			if(intArray[minNumIndex]>intArray[j]){//가장 작은값 찾기
+				minNumIndex = j;//가장 값이 작은 인덱스 저장
 				//printf("작은 인덱스->%d\n",j);
 			}
 		}
-		if(i!=minNumIndex){
-			swap(&intArray[i],&intArray[minNumIndex]);
+		if(i!=minNumIndex){//가장 작은 값이 다른 위치에 있다면
+			swap(&intArray[i],&intArray[minNumIndex]);//값 변경
 		}
 	}
 
-	for(i = 0;i<inputSize;i++){
+	for(i = 0;i<inputSize;i++){ //배열 값 출력
 		printf("%d ", intArray[i]);
 	}
 	printf("\n\n");
